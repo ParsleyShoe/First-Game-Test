@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
 
     private Rigidbody rigidbody;
-    private float movementSpeed = 5;
+    [Range(5.0f, 25.0f)]
+    public float movementSpeed = 5;
     public Text scoreText;
     private int score = 0;
     public ParticleSystem particleSystemPlayer;
@@ -27,7 +29,7 @@ public class PlayerController : MonoBehaviour {
             particleSystemPlayer.Stop();
         }
         else if (!particleSystemPlayer.isPlaying) {
-                particleSystemPlayer.Play();
+            particleSystemPlayer.Play();
         }
 
     }
@@ -57,5 +59,9 @@ public class PlayerController : MonoBehaviour {
             Destroy(other.gameObject, 1.5f);
             gameOverPanel.SetActive(true);
         }
+    }
+
+    public void PlayAgain() {
+        SceneManager.LoadScene("SceneOne");
     }
 }
